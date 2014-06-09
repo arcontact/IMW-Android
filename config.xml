@@ -73,7 +73,7 @@
 	<gap:platform name="android" />
 
     <!-- Define app splash screen for each platform. -->
-	<gap:splash src="res/screen/android/asplash.9.png" />
+	<gap:splash src="res/screen/android/splash.9.png" />
 
     <!--
         Define access to external domains.
