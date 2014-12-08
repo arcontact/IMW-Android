@@ -159,6 +159,9 @@ var	warsztaty = [],
 		if(typeof navigator.connection == 'undefined' || typeof navigator.connection.type == 'undefined') {
 			return 'fail';
 		}
+		
+		console.log(Connection);
+		
 		var networkState = navigator.connection.type;
 		var states = {};
 		states[Connection.UNKNOWN]  = 'Unknown connection';
@@ -1022,7 +1025,7 @@ var app = {
 		window.plugins.toast.showLongCenter('Brak połączenia z internetem.',function(a){},function(b){});
 	},
 	onOnline: function() {
-		window.plugins.toast.showLongCenter('Nawiązano połączenie z internetem.',function(a){},function(b){});
+		//window.plugins.toast.showLongCenter('Nawiązano połączenie z internetem.',function(a){},function(b){});
 		if(!artykuly_loaded){
 			feedArtykuly();
 		}
