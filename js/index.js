@@ -160,8 +160,6 @@ var	warsztaty = [],
 			return 'fail';
 		}
 		
-		console.log(Connection);
-		
 		var networkState = navigator.connection.type;
 		var states = {};
 		states[Connection.UNKNOWN]  = 'Unknown connection';
