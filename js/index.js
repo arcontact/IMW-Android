@@ -40,7 +40,7 @@ var	warsztaty = [],
 	artykuly = [],
 	articles_first_load = true,
 	articles_pagination_loaded = false,
-	new_version = true,
+	new_version = false,
 	warsztaty_file_exists = false,
 	warsztaty_loaded = false,
 	artykuly_loaded = false,
@@ -401,8 +401,36 @@ var	warsztaty = [],
 	}
 	function renderWarsztat(id){
 		var item = use_warsztaty[id];
+		var logo;
+		
+		switch(item.umowa) {
+			default:
+			case 'Q-Service':
+				logo = 'img/qservice-logo-mini.png';
+			break;
+			
+			case 'Q-Service Truck':
+				logo = 'img/qservicetruck-logo-mini.png';
+			break;
+			
+			case 'Q-Service Moto':
+				logo = 'img/qservicemoto-logo-mini.png';
+			break;
+			
+			case 'Q-Service Premium':
+				logo = 'img/qservicepremium-logo-mini.png';
+			break;
+			
+			case 'Perfect Service':
+				logo = 'img/perfectservice-logo-mini.png';
+			break;
+		}
+		
+		var warsztat_html = logo ? '<img src="' +logo+ '" alt="" /><br />' : '';
+			warsztat_html += '<h2>'+item.konto+'</h2><p>'+item.ulica+'<br />'+item.kod.substr(0,2)+'-'+item.kod.substr(2)+' '+item.miasto+'</p><table><tr><td>otwarte </td><td>'+item.open+'</td></tr><tr><td>w soboty </td><td>'+item.opensob+'</td></tr></table>';
+		
 		$("#warsztat .content").empty();
-		$("#warsztat .content").append('<h2>'+item.konto+'</h2><p>'+item.ulica+'<br />'+item.kod.substr(0,2)+'-'+item.kod.substr(2)+' '+item.miasto+'</p><table><tr><td>otwarte </td><td>'+item.open+'</td></tr><tr><td>w soboty </td><td>'+item.opensob+'</td></tr></table>');
+		$("#warsztat .content").append(warsztat_html);
 		if(item.mechanika==1 || item.przeglad==1 || item.wulkanizacja==1 || item.klimatyzacja==1 || item.geometria==1 || item.diagnostyka==1 || item.elektryka==1 || item.zawieszenie==1 || item.blacharstwo==1 || item.lakiernictwo==1 || item.szyby==1) {
 			var list = document.createElement('ul');
 			list.style.marginTop = "15px";
