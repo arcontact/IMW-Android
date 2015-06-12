@@ -40,7 +40,7 @@ var	warsztaty = [],
 	artykuly = [],
 	articles_first_load = true,
 	articles_pagination_loaded = false,
-	new_version = false,
+	new_version = true,
 	warsztaty_file_exists = false,
 	warsztaty_loaded = false,
 	artykuly_loaded = false,
@@ -105,6 +105,9 @@ var	warsztaty = [],
 		renderWarsztaty(value);
 	}
 	function warsztaty_order(type){
+		var filter_select = document.getElementById('filter_select');
+		filter_select.selectedIndex = 0;
+	
 		_order = type;
 		var render = true;
 		$("#address2").remove();
@@ -300,32 +303,9 @@ var	warsztaty = [],
 			warsztaty_loaded = false;
 		}
 	}
-	function renderWarsztaty(filter){
-		if(filter) {
-			var wf;
-			
-			switch(filter) {
-				case '1':
-					wf = 'osobowy';
-				break;
-				case '2':
-					wf = 'ciezarowy';
-				break;
-				case '3':
-					wf = 'motocyklowy';
-				break;
-			}
-			
-			var _warsztaty = {};
-			$.each(warsztaty,function(i,item){
-				if(item.filtr == wf) {
-					_warsztaty[i] = item;
-				}
-			});
-		} else {
-			_warsztaty = warsztaty;
-		}
-	
+	function renderWarsztaty(filter){	
+		_warsztaty = warsztaty;
+		
 		if(!warsztaty_pagination_loaded){
 			$("body").prepend('<div class="text-center pagination_outer warsztaty_pagination_outer"><div class="relative"><div class="warsztaty_pagination pagination"><a href="#" class="first" data-action="first">&laquo;</a><a href="#" class="previous" data-action="previous">&lsaquo;</a><input type="text" readonly="readonly" /><a href="#" class="next" data-action="next">&rsaquo;</a><a href="#" class="last" data-action="last">&raquo;</a></div></div></div>');
 			if(!mapRenderWarsztaty){
@@ -361,11 +341,37 @@ var	warsztaty = [],
 					use_warsztaty = sortByKey(_warsztaty,'odleglosc');
 				}
 			}
+			
+			if(filter) {
+				var wf;
+				
+				switch(filter) {
+					case '1':
+						wf = 'osobowy';
+					break;
+					case '2':
+						wf = 'ciezarowy';
+					break;
+					case '3':
+						wf = 'motocyklowy';
+					break;
+				}
+				
+				var _tmp = {};
+				$.each(use_warsztaty,function(i,item){
+					if(item.filtr == wf) {
+						_tmp[i] = item;
+					}
+				});
+				
+				len = Object.keys(_tmp).length;
+				use_warsztaty = _tmp;
+			}
+			
 			var per_page = 10;
 			var page_count = 0;
 			var page_data = 0;
 			var list = document.createElement('ul');
-			var wf = null;
 			
 			$.each(use_warsztaty,function(i,item){
 				var li = document.createElement('li');
