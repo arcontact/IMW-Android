@@ -273,6 +273,7 @@ var	warsztaty = [],
 						new_version = true;
 					}
 				}
+				alert(response);
 			}
 		});
 	}
