@@ -48,8 +48,7 @@ var	warsztaty = [],
 	warsztaty_path = 'warsztaty.txt',
 	warsztaty_from_file = false,
 	artykulyUrl = 'http://www.q-service.com.pl/rss/',
-	//artykulyUrl = 'http://www.arcontact.pl/warsztaty_inter_cars/rss.php',
-	warsztatyUrl = 'http://www.arcontact.pl/warsztaty_inter_cars/feed.php',
+	warsztatyUrl = 'http://api.arcontact.pl/icw/',
 	form_email = 'mifdetal@intercars.eu',
 	map,
 	startingLatitude = 52.069347,
@@ -148,6 +147,14 @@ var	warsztaty = [],
 				render = true;
 			}
 		}
+		if(render){
+			renderWarsztaty();
+		}
+	}
+	function warsztaty_filter(type){
+		_order = type;
+		var render = true;
+		$("#address2").remove();
 		if(render){
 			renderWarsztaty();
 		}
@@ -294,7 +301,7 @@ var	warsztaty = [],
 			warsztaty_loaded = false;
 		}
 	}
-	function renderWarsztaty(){
+	function renderWarsztaty(filter){
 		if(!warsztaty_pagination_loaded){
 			$("body").prepend('<div class="text-center pagination_outer warsztaty_pagination_outer"><div class="relative"><div class="warsztaty_pagination pagination"><a href="#" class="first" data-action="first">&laquo;</a><a href="#" class="previous" data-action="previous">&lsaquo;</a><input type="text" readonly="readonly" /><a href="#" class="next" data-action="next">&rsaquo;</a><a href="#" class="last" data-action="last">&raquo;</a></div></div></div>');
 			if(!mapRenderWarsztaty){
@@ -334,9 +341,29 @@ var	warsztaty = [],
 			var page_count = 0;
 			var page_data = 0;
 			var list = document.createElement('ul');
+			var wf = null;
+			
+			switch(filter) {
+				case '1':
+					wf = 'osobowy';
+				break;
+				case '2':
+					wf = 'ciezarowy';
+				break;
+				case '3':
+					wf = 'motocyklowy';
+				break;
+			}
+			
 			$.each(use_warsztaty,function(i,item){
 				var li = document.createElement('li');
-				li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
+				
+				if(typeof wf != null && wf == item.filtr.toLowerCase()) {
+					li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
+				} else {
+					li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
+				}
+				
 				if(page_count<per_page){
 					li.style.display = 'block';
 				}
@@ -1001,6 +1028,7 @@ var app = {
     initialize: function() {
         this.bindEvents();
         this.initFastClick();
+		reloadScripts();
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
