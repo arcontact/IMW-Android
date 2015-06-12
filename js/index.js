@@ -48,7 +48,8 @@ var	warsztaty = [],
 	warsztaty_path = 'warsztaty.txt',
 	warsztaty_from_file = false,
 	artykulyUrl = 'http://www.q-service.com.pl/rss/',
-	warsztatyUrl = 'http://api.arcontact.pl/icw/',
+	//artykulyUrl = 'http://www.arcontact.pl/warsztaty_inter_cars/rss.php',
+	warsztatyUrl = 'http://www.api.arcontact.pl/icw/',
 	form_email = 'mifdetal@intercars.eu',
 	map,
 	startingLatitude = 52.069347,
@@ -100,10 +101,8 @@ var	warsztaty = [],
 			return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 		});
 	};
-	function warsztaty_filter(value){
-		_warsztaty = filterValuePart(warsztaty,value);
-		_search = true;
-		renderWarsztaty(true);
+	function warsztaty_filter_list(value){
+		renderWarsztaty(value);
 	}
 	function warsztaty_order(type){
 		_order = type;
@@ -189,7 +188,7 @@ var	warsztaty = [],
 			$.ajax({
 				url: artykulyUrl,
 				type: 'GET',
-				async: false,
+				async: true,
 				cache: false,
 				dataType: 'xml',
 				success: function(response){
@@ -256,7 +255,7 @@ var	warsztaty = [],
 		$.ajax({
 			url: warsztatyUrl,
 			type: 'GET',
-			async: false,
+			async: true,
 			cache: false,
 			data: {type:"version"},
 			dataType: 'json',
@@ -273,7 +272,6 @@ var	warsztaty = [],
 						new_version = true;
 					}
 				}
-				alert(response);
 			}
 		});
 	}
@@ -282,7 +280,7 @@ var	warsztaty = [],
 			$.ajax({
 				url: warsztatyUrl,
 				type: 'GET',
-				async: false,
+				async: true,
 				cache: false,
 				data: {type:"list"},
 				dataType: 'json',
@@ -358,8 +356,8 @@ var	warsztaty = [],
 			
 			$.each(use_warsztaty,function(i,item){
 				var li = document.createElement('li');
-				
-				if(typeof wf != null && wf == item.filtr.toLowerCase()) {
+				if(typeof wf != null && item.filtr.toLowerCase() == wf) {
+					console.log(item);
 					li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
 				} else {
 					li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
@@ -391,7 +389,7 @@ var	warsztaty = [],
 		var item = use_warsztaty[id];
 		$("#warsztat .content").empty();
 		$("#warsztat .content").append('<h2>'+item.konto+'</h2><p>'+item.ulica+'<br />'+item.kod.substr(0,2)+'-'+item.kod.substr(2)+' '+item.miasto+'</p><table><tr><td>otwarte </td><td>'+item.open+'</td></tr><tr><td>w soboty </td><td>'+item.opensob+'</td></tr></table>');
-		if(item.mechanika==1 || item.przeglad==1 || item.wulkanizacja==1 || item.klimatyzacja==1 || item.geometria==1 || item.diagnostyka==1 || item.elektryka==1 || item.spaliny==1 || item.blacharstwo==1 || item.lakiernictwo==1 || item.szyby==1) {
+		if(item.mechanika==1 || item.przeglad==1 || item.wulkanizacja==1 || item.klimatyzacja==1 || item.geometria==1 || item.diagnostyka==1 || item.elektryka==1 || item.zawieszenie==1 || item.blacharstwo==1 || item.lakiernictwo==1 || item.szyby==1) {
 			var list = document.createElement('ul');
 			list.style.marginTop = "15px";
 			list.style.marginLeft = "0px";
@@ -418,8 +416,8 @@ var	warsztaty = [],
 			if(item.geometria==1){
 				var li=document.createElement('li');li.innerHTML='geometria kół';list.appendChild(li);
 			}
-			if(item.spaliny==1){
-				var li=document.createElement('li');li.innerHTML='układy wydechowe';list.appendChild(li);
+			if(item.zawieszenie==1){
+				var li=document.createElement('li');li.innerHTML='zawieszenie';list.appendChild(li);
 			}
 			if(item.elektryka==1){
 				var li=document.createElement('li');li.innerHTML='elektryka';list.appendChild(li);
@@ -1029,8 +1027,8 @@ var app = {
     initialize: function() {
         this.bindEvents();
         this.initFastClick();
-		checkVersion();
-		reloadScripts();
+		//reloadScripts();
+		//feedWarsztaty();
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
