@@ -180,8 +180,8 @@ var	warsztaty = [],
 		return states[networkState];
 	}
 	function gotConnection(){
-		var a = checkConnection();
-		if(a == 'fail'){return false;}
+		/*var a = checkConnection();
+		if(a == 'fail'){return false;}*/
 		return true;
 	}
 	function feedArtykuly(){
@@ -1029,6 +1029,8 @@ var app = {
     initialize: function() {
         this.bindEvents();
         this.initFastClick();
+		checkVersion();
+		reloadScripts();
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
