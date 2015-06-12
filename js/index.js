@@ -1028,7 +1028,6 @@ var app = {
     initialize: function() {
         this.bindEvents();
         this.initFastClick();
-		reloadScripts();
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
