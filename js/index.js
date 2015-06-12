@@ -179,8 +179,8 @@ var	warsztaty = [],
 		return states[networkState];
 	}
 	function gotConnection(){
-		/*var a = checkConnection();
-		if(a == 'fail'){return false;}*/
+		var a = checkConnection();
+		if(a == 'fail'){return false;}
 		return true;
 	}
 	function feedArtykuly(){
@@ -301,6 +301,31 @@ var	warsztaty = [],
 		}
 	}
 	function renderWarsztaty(filter){
+		if(filter) {
+			var wf;
+			
+			switch(filter) {
+				case '1':
+					wf = 'osobowy';
+				break;
+				case '2':
+					wf = 'ciezarowy';
+				break;
+				case '3':
+					wf = 'motocyklowy';
+				break;
+			}
+			
+			var _warsztaty = {};
+			$.each(warsztaty,function(i,item){
+				if(item.filtr == wf) {
+					_warsztaty[i] = item;
+				}
+			});
+		} else {
+			_warsztaty = warsztaty;
+		}
+	
 		if(!warsztaty_pagination_loaded){
 			$("body").prepend('<div class="text-center pagination_outer warsztaty_pagination_outer"><div class="relative"><div class="warsztaty_pagination pagination"><a href="#" class="first" data-action="first">&laquo;</a><a href="#" class="previous" data-action="previous">&lsaquo;</a><input type="text" readonly="readonly" /><a href="#" class="next" data-action="next">&rsaquo;</a><a href="#" class="last" data-action="last">&raquo;</a></div></div></div>');
 			if(!mapRenderWarsztaty){
@@ -342,26 +367,9 @@ var	warsztaty = [],
 			var list = document.createElement('ul');
 			var wf = null;
 			
-			switch(filter) {
-				case '1':
-					wf = 'osobowy';
-				break;
-				case '2':
-					wf = 'ciezarowy';
-				break;
-				case '3':
-					wf = 'motocyklowy';
-				break;
-			}
-			
 			$.each(use_warsztaty,function(i,item){
 				var li = document.createElement('li');
-				if(typeof wf != null && item.filtr.toLowerCase() == wf) {
-					console.log(item);
-					li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
-				} else {
-					li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
-				}
+				li.innerHTML = '<a href="#warsztat" onclick="renderWarsztat('+i+')"><h6>'+item.miasto.toLowerCase()+', '+item.ulica.toLowerCase()+'</h6><span>'+item.konto.toUpperCase()+'</span></a>';
 				
 				if(page_count<per_page){
 					li.style.display = 'block';
@@ -1027,8 +1035,8 @@ var app = {
     initialize: function() {
         this.bindEvents();
         this.initFastClick();
-		//reloadScripts();
-		//feedWarsztaty();
+		//this.onDeviceReady();
+		//this.onOnline();
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
