@@ -51,8 +51,7 @@ var	warsztaty = [],
 	//artykulyUrl = 'http://www.intercars.com.pl/pl/wiedza/wydarzenia/?r=rss',
 	//artykulyUrl = 'http://www.arcontact.pl/warsztaty_inter_cars/rss.php',
 	warsztatyUrl = 'http://www.api.arcontact.pl/icw/',
-	//form_email = 'mifdetal@intercars.eu',
-	form_email = 'tomasz@arcontact.pl',
+	form_email = 'mifdetal@intercars.eu',
 	map,
 	startingLatitude = 52.069347,
 	startingLongitude = 19.480204,
@@ -483,18 +482,6 @@ var	warsztaty = [],
 			mailbody = '<p>Warsztat:<br />'+item.konto+'<br />'+item.ulica+'<br />'+item.kod.substr(0,2)+'-'+item.kod.substr(2)+' '+item.miasto+'</p>',
 			subject = 'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.';
 		window.plugins.EmailComposer.showEmailComposer(subject,mailbody,[form_email],[],[],true,[]);
-		/*
-		window.plugin.email.isServiceAvailable(
-			function(isAvailable){
-				window.plugin.email.open({
-					to:[form_email],
-					subject:'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.',
-					body:mailbody,
-					isHtml:true
-				});
-			}
-		);
-		*/
 	}
 	function warsztatyLoadError(){
 		if(gotConnection()) {
@@ -946,18 +933,6 @@ var	warsztaty = [],
 					var mailbody1 = '<p>Dane z formularza:</p><p>typ auta: '+$("#formtyp").val()+'<br />numer VIN: '+$("#vin").val()+'<br />marka, model, silnik: '+$("#marka").val()+'<br />rok produkcji: '+$("#rok").val()+'<br />rodzaj paliwa: '+$("#paliwo").val()+'<br />numer rejestracyjny: '+$("#rejestr").val()+'<br />usługa do wyceny: '+$("#usluga").val()+'<br />e-mail: '+$("#email").val()+'<br />numer telefonu: '+$("#tel").val()+'<br />miasto: '+$("#miasto").val()+'</p>';
 					var subject = 'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.';
 					window.plugins.EmailComposer.showEmailComposer(subject,mailbody1,[form_email],[],[],true,[]);
-					/*
-					window.plugin.email.isServiceAvailable(
-						function(isAvailable){
-							window.plugin.email.open({
-								to:[form_email],
-								subject:'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.',
-								body:mailbody1,
-								isHtml:true
-							});
-						}
-					);
-					*/
 				}
 			});
 			if(gotConnection()){
