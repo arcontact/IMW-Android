@@ -50,7 +50,7 @@
     <plugin name="cordova-plugin-splashscreen"        source="npm" spec="~3.2.1" />
 	<plugin name="cordova-plugin-whitelist"           source="npm" spec="~1.2.1" />
 	<plugin name="nl.x-services.plugins.toast" spec="2.0.2" source="pgb" />
-	<plugin name="de.appplant.cordova.plugin.email-composer" spec="0.8.2" source="pgb" />
+	<plugin name="com.badrit.emailcomposer" spec="0.1.0" source="pgb" />
 	
     <icon src="icon.png" />
 	<platform name="android">
