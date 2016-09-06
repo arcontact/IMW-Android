@@ -32,6 +32,7 @@ var	warsztaty = [],
 	use_warsztaty = [],
 	_order = 1,
 	_search = false,
+	_word = '',
 	warsztaty_first_load = true,
 	warsztaty_pagination_loaded = false,
 	warsztatyDiv = document.getElementById("warsztaty"),
@@ -154,13 +155,14 @@ var	warsztaty = [],
 			renderWarsztaty();
 		}
 	}
+	function warsztaty_search(val){
+		_word = val;
+		renderWarsztaty();
+	}
 	function warsztaty_filter(type){
 		_order = type;
-		var render = true;
 		$("#address2").remove();
-		if(render){
-			renderWarsztaty();
-		}
+		renderWarsztaty();
 	}
 	function setcurrentPosition(pos){
 		currentPosition = pos;
@@ -319,6 +321,9 @@ var	warsztaty = [],
 		}
 		if(!_search){
 			_warsztaty = filterValuePart(_warsztaty,'');
+		}
+		if(_word.length > 0){
+			_warsztaty = filterValuePart(_warsztaty,_word);
 		}
 		var len = Object.keys(_warsztaty).length;
 		if( len > 0 ) {
