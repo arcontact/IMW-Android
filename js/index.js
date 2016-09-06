@@ -316,10 +316,7 @@ var	warsztaty = [],
 			}
 			warsztaty_pagination_loaded = true;
 		}
-		if(_warsztaty.length <= 0 && !_search){
-			_warsztaty = warsztaty;
-		}
-		if(!_search){
+		if(!_search && _word.length <= 0){
 			_warsztaty = filterValuePart(_warsztaty,'');
 		}
 		if(_word.length > 0){
