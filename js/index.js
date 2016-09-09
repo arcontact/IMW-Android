@@ -479,11 +479,10 @@ var	warsztaty = [],
 	}
 	function warsztatMail(id){
 		var	item = use_warsztaty[id],
-			mailbody = '<p>Warsztat:<br />'+item.konto+'<br />'+item.ulica+'<br />'+item.kod.substr(0,2)+'-'+item.kod.substr(2)+' '+item.miasto+'</p>',
-			subject = 'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.';
+			mailbody = '<p>Warsztat:<br />'+item.konto+'<br />'+item.ulica+'<br />'+item.kod.substr(0,2)+'-'+item.kod.substr(2)+' '+item.miasto+'</p>';
 		//window.plugins.EmailComposer.showEmailComposer(subject,mailbody,[form_email],[],[],true,[]);
-		//cordova.plugins.email.isAvailable(
-		//	function(isAvailable){
+		cordova.plugins.email.isAvailable(
+			function(isAvailable){
 				cordova.plugins.email.open({
 					app: 'mailto',
 					to:[form_email],
@@ -491,8 +490,8 @@ var	warsztaty = [],
 					body:mailbody,
 					isHtml:true
 				});
-		//	}
-		//);
+			}
+		);
 		//var link = "mailto:"+form_email+"?subject=" + escape(subject) + "&body=" + escape(mailbody);
 		//window.location.href = link;
 	}
@@ -944,10 +943,9 @@ var	warsztaty = [],
 				submitButton:'.happybutton',
 				happy:function(){
 					var mailbody = '<p>Dane z formularza:</p><p>typ auta: '+$("#formtyp").val()+'<br />numer VIN: '+$("#vin").val()+'<br />marka, model, silnik: '+$("#marka").val()+'<br />rok produkcji: '+$("#rok").val()+'<br />rodzaj paliwa: '+$("#paliwo").val()+'<br />numer rejestracyjny: '+$("#rejestr").val()+'<br />usługa do wyceny: '+$("#usluga").val()+'<br />e-mail: '+$("#email").val()+'<br />numer telefonu: '+$("#tel").val()+'<br />miasto: '+$("#miasto").val()+'</p>';
-					var subject = 'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.';
 					//window.plugins.EmailComposer.showEmailComposer(subject,mailbody,[form_email],[],[],true,[]);
-					//cordova.plugins.email.isAvailable(
-					//	function(isAvailable){
+					cordova.plugins.email.isAvailable(
+						function(isAvailable){
 							cordova.plugins.email.open({
 								app: 'mailto',
 								to:[form_email],
@@ -955,8 +953,8 @@ var	warsztaty = [],
 								body:mailbody,
 								isHtml:true
 							});
-					//	}
-					//);
+						}
+					);
 					//var link = "mailto:"+form_email+"?subject=" + escape(subject) + "&body=" + escape(mailbody);
 					//window.location.href = link;
 				}
