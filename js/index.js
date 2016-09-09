@@ -485,6 +485,7 @@ var	warsztaty = [],
 		cordova.plugins.email.isAvailable(
 			function(isAvailable){
 				cordova.plugins.email.open({
+					app: 'mailto',
 					to:[form_email],
 					subject:'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.',
 					body:mailbody,
@@ -946,6 +947,7 @@ var	warsztaty = [],
 					cordova.plugins.email.isAvailable(
 						function(isAvailable){
 							cordova.plugins.email.open({
+								app: 'mailto',
 								to:[form_email],
 								subject:'Zapytanie z aplikacji mobilnej Inter Cars sieć warsztatów.',
 								body:mailbody1,
