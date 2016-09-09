@@ -50,7 +50,7 @@
     <plugin name="cordova-plugin-splashscreen"        source="npm" spec="~3.2.1" />
 	<plugin name="cordova-plugin-whitelist"           source="npm" spec="~1.2.1" />
 	<plugin name="nl.x-services.plugins.toast" spec="2.0.2" source="pgb" />
-	<plugin name="cordova-plugin-email-composer" 	  source="git" spec="0.8.2"  />
+	<plugin spec="https://github.com/katzer/cordova-plugin-email-composer#0.8.2" 	  source="git"  />
 	
     <icon src="icon.png" />
 	<platform name="android">
