@@ -987,8 +987,8 @@ var	warsztaty = [],
 				}
 			});
 			$(document).on("pageshow","#page1",function(){
-				$(".articles_pagination_outer").stop().fadeOut(100);
-				$(".warsztaty_pagination_outer").stop().fadeOut(100);
+				$(".articles_pagination_outer").fadeOut(100);
+				$(".warsztaty_pagination_outer").fadeOut(100);
 			});
 			$(document).on("pageshow","#page2",function(){
 				$(".articles_pagination_outer").fadeIn(200);
