@@ -26,7 +26,6 @@ footer{position:fixed;left:0;right:0;bottom:-81px;z-index:1000;width:100%;-moz-b
 footer a{float:left;width:20%;padding:8px}
 
 .content{padding:10px;}
-#page1{padding-bottom:81px}
 #page1 .content .ikona1{background-image:url('../img/srodek-1s.png')}
 #page1 .content .ikona2{background-image:url('../img/srodek-2s.png')}
 #page1 .content .ikona3{background-image:url('../img/srodek-3s.png')}
