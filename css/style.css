@@ -55,14 +55,17 @@ footer a{float:left;width:20%;padding:8px}
 #warsztaty ul li a .fa{margin-top:5px;color:#ddd}
 #warsztaty ul li a:active h6,#warsztaty ul li a:active .fa{color:#d60811}
 
-.pagination_outer{position:fixed;width:100%;bottom:0px;left:0px;padding:10px;z-index:900;background-color:#fff;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);display:none}
-.pagination{display:inline-block;border:1px solid #CDCDCD;border-radius:3px;width:244px}
-.pagination a{display:inline-block;width:28px;height:28px;line-height:28px;outline:0;border-right:1px solid #CDCDCD;border-left:1px solid #CDCDCD;color:#555;vertical-align:middle;text-align:center;text-decoration:none;font-weight:700;font-size:18px;font-family:Lato,sans-serif;background-color:#f3f3f3;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#f3f3f3),color-stop(100%,lightgrey));background-image:-webkit-linear-gradient(#f3f3f3,lightgrey);background-image:linear-gradient(#f3f3f3,lightgrey)}
+.pagination_outer{position:fixed;width:100%;bottom:0px;left:0px;z-index:900;background-color:#fff;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateZ(0);display:none}
+.pagination{display:block;border:1px solid #CDCDCD}
+.pagination a{position:relative;z-index:2;display:block;width:36px;height:36px;line-height:36px;outline:0;border-right:1px solid #CDCDCD;border-left:1px solid #CDCDCD;color:#555;vertical-align:middle;text-align:center;text-decoration:none;font-weight:700;font-size:18px;font-family:Lato,sans-serif;background-color:#f3f3f3;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#f3f3f3),color-stop(100%,lightgrey));background-image:-webkit-linear-gradient(#f3f3f3,lightgrey);background-image:linear-gradient(#f3f3f3,lightgrey)}
 .pagination a:active,.pagination a:focus,.pagination a:hover{background-color:#cecece;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#e4e4e4),color-stop(100%,#cecece));background-image:-webkit-linear-gradient(#e4e4e4,#cecece);background-image:linear-gradient(#e4e4e4,#cecece)}
 .pagination a.disabled,.pagination a.disabled:active,.pagination a.disabled:focus,.pagination a.disabled:hover{background-color:#f3f3f3;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#f3f3f3),color-stop(100%,lightgrey));background-image:-webkit-linear-gradient(#f3f3f3,lightgrey);background-image:linear-gradient(#f3f3f3,lightgrey);color:#A8A8A8;cursor:default}
-.pagination a:first-child{border:none;border-radius:2px 0 0 2px}
-.pagination a:last-child{border:none;border-radius:0 2px 2px 0}
-.pagination input{display:inline-block;margin:0;padding:0;width:130px;height:28px;outline:0;border:none;vertical-align:middle;text-align:center}
+.pagination a:first-child{border:none}
+.pagination a:last-child{border:none}
+.pagination .pagination-input-outer{position:absolute;z-index:1;width:100%;left:0;right:0;bottom:0;padding:0 72px;}
+.pagination input{display:block;margin:0;padding:0;height:36px;outline:0;border:none;vertical-align:middle;text-align:center;}
+.pagination a.first,.pagination a.previous{float:left;}
+.pagination a.next,.pagination a.last{float:right;}
 
 .unhappy{margin:0!important;border:1px solid #af0f0a!important}
 .unhappyMessage{font-size:0.775rem;color:#af0f0a;font-weight:normal;line-height:1.5;display:block;margin-bottom:10px}
