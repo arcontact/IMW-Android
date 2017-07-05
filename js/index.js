@@ -70,6 +70,17 @@ var	warsztaty = [],
 		qservicetruck:"img/mapicon4.png"
 	};
 
+	String.prototype.escapeDiacritics = function(){
+		return this.replace(/ą/g, 'a').replace(/Ą/g, 'A')
+			.replace(/ć/g, 'c').replace(/Ć/g, 'C')
+			.replace(/ę/g, 'e').replace(/Ę/g, 'E')
+			.replace(/ł/g, 'l').replace(/Ł/g, 'L')
+			.replace(/ń/g, 'n').replace(/Ń/g, 'N')
+			.replace(/ó/g, 'o').replace(/Ó/g, 'O')
+			.replace(/ś/g, 's').replace(/Ś/g, 'S')
+			.replace(/ż/g, 'z').replace(/Ż/g, 'Z')
+			.replace(/ź/g, 'z').replace(/Ź/g, 'Z');
+	}
 	function supports_html5_storage() {
 		try {
 			return 'localStorage' in window && window['localStorage'] !== null;
@@ -374,7 +385,7 @@ var	warsztaty = [],
 				
 				var _tmp = {};
 				$.each(use_warsztaty,function(i,item){
-					if(item.filtr == wf) {
+					if(item.filtr.toLowerCase().escapeDiacritics() == wf) {
 						_tmp[i] = item;
 					}
 				});
