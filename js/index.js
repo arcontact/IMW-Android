@@ -218,11 +218,11 @@ var	warsztaty = [],
 							renderArtykuly();
 							artykuly_loaded = true;
 						} else {
-							artykulyDiv.innerHTML = '<div class="panel text-center">Przepraszamy ale nie udało się wgrać aktualności.</div>';
+							artykulyDiv.innerHTML = '<div class="panel text-center">Przepraszamy, ale nie udało się wgrać aktualności.</div>';
 						}
 					},
 					error: function(){
-						artykulyDiv.innerHTML = '<div class="panel text-center">Przepraszamy ale nie udało się wgrać aktualności.</div>';
+						artykulyDiv.innerHTML = '<div class="panel text-center">Przepraszamy, ale nie udało się wgrać aktualności.</div>';
 					}
 				});
 			}
