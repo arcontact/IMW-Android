@@ -4,12 +4,12 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "pl.com.intercars.warsztaty"
-        version   = "1.3.4">
+        version   = "1.4">
 
     <name>Inter Cars sieć warsztatów</name>
 
     <description>
-        Inter Cars sieć warsztatów Q-Service, Perfect Service, Q-Service Premium.
+        Oficjalna aplikacja Inter Cars S.A. sieci serwisowych: Q-Service Premium, Q-Service, Perfect Service, Q-Service Truck, Q-Service Moto. Znajdziesz w niej zawsze aktualne dane teleadresowe serwisów wraz z lokalizacją na mapie, która dokładnie doprowadzi Ciebie do wybranego warsztatu zrzeszonego w sieciach serwisowych Inter Cars S.A. Ponadto aplikacja sieci serwisowych dostarcza najnowsze aktualności oraz funkcję wyceny naprawy.
     </description>
 
 	<author href="http://www.intercars.eu" email="sekretariat@intercars.eu">

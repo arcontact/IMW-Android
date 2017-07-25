@@ -206,7 +206,8 @@ var	warsztaty = [],
 			if(articles_first_load){
 				articles_first_load = false;
 				$.ajax({
-					url: artykulyUrl,
+					//url: artykulyUrl,
+					url: 'http://api.arcontact.pl/icw/feed.php',
 					type: 'GET',
 					async: true,
 					cache: false,
@@ -246,8 +247,14 @@ var	warsztaty = [],
 			var pubDate = $(d[0]).find('pubDate').text();
 			var _date = new Date(Date.parse(pubDate));
 			var date_string = _date.getDate() + " " + months[_date.getMonth()] + " " + _date.getFullYear();
+			var thumbUrl = 'img/thumb.png';
+			var thumb = d[0].getElementsByTagNameNS('*','thumbnail');
+			if(typeof thumb != 'undefined'){
+				var thumbUrl = thumb[0].attributes.getNamedItem('url').value;
+			}
+			thumbHTML = '<img src="'+thumbUrl+'" alt="motofakty">';
 			var li = document.createElement('li');
-			li.innerHTML = '<a onclick="window.open(\''+link+'\',\'_system\',\'location=no\')"><i class="fa fa-chevron-circle-right pull-right"></i><h6>'+title+'</h6><span>'+date_string+'</span></a>';
+			li.innerHTML = '<a onclick="window.open(\''+link+'\',\'_system\',\'location=no\')">'+thumbHTML+'<i class="fa fa-chevron-circle-right pull-right"></i><h6>'+title+'</h6><span>'+date_string+'</span></a>';
 			if(page_count<per_page){
 				li.style.display = 'block';
 			}
@@ -259,20 +266,22 @@ var	warsztaty = [],
 			page_count++;
 		}
 		artykulyDiv.innerHTML = '<ul>'+list.innerHTML+'</ul>';
-		$("body").prepend('<div class="text-center pagination_outer articles_pagination_outer"><div class="articles_pagination pagination"><a href="#" class="first" data-action="first">&laquo;</a><a href="#" class="previous" data-action="previous">&lsaquo;</a><a href="#" class="next" data-action="next">&rsaquo;</a><a href="#" class="last" data-action="last">&raquo;</a><div class="pagination-input-outer"><input type="text" readonly="readonly" data-max-page="'+Math.round((c.length/per_page))+'" /></div></div></div>');
-		$('.articles_pagination').jqPagination({
-			paged:function(page) {
-				$('#artykuly ul li').hide();
-				$('#artykuly ul li[data-page="'+page+'"]').show();
-			}
-		});
-		$(".articles_pagination_outer").fadeOut(100);
-		$(document).on("pageshow","#page2",function(){
-			$(".articles_pagination_outer").fadeIn(200);
-		});
-		$(document).on("pagebeforehide","#page2",function(){
+		if(c.length > per_page){
+			$("body").prepend('<div class="text-center pagination_outer articles_pagination_outer"><div class="articles_pagination pagination"><a href="#" class="first" data-action="first">&laquo;</a><a href="#" class="previous" data-action="previous">&lsaquo;</a><a href="#" class="next" data-action="next">&rsaquo;</a><a href="#" class="last" data-action="last">&raquo;</a><div class="pagination-input-outer"><input type="text" readonly="readonly" data-max-page="'+Math.round((c.length/per_page))+'" /></div></div></div>');
+			$('.articles_pagination').jqPagination({
+				paged:function(page) {
+					$('#artykuly ul li').hide();
+					$('#artykuly ul li[data-page="'+page+'"]').show();
+				}
+			});
 			$(".articles_pagination_outer").fadeOut(100);
-		});
+			$(document).on("pageshow","#page2",function(){
+				$(".articles_pagination_outer").fadeIn(200);
+			});
+			$(document).on("pagebeforehide","#page2",function(){
+				$(".articles_pagination_outer").fadeOut(100);
+			});
+		}
 	}
 	function checkVersion(){
 		$.ajax({
@@ -912,7 +921,37 @@ var	warsztaty = [],
 		$("#map_canvas").addClass("loaded").html('<div class="panel text-center">Włącz internet aby załadować mapę.<br /><br /><a onclick="locationreload(\'page4\');"><i class="fa fa-refresh"></i> odśwież</a></div>');
 		$(".input-outer").hide();
 	}
+	function feedSettings(){
+		if(gotConnection()){
+			$.ajax({
+				url: warsztatyUrl,
+				type: 'GET',
+				async: true,
+				cache: false,
+				dataType: 'json',
+				data: {type:"settings"},
+				timeout: 5000,
+				success: function(response){
+					if(typeof response.artykulyUrl != 'undefined'){
+						artykulyUrl = response.artykulyUrl;
+					}
+					if(typeof response.form_email != 'undefined'){
+						form_email = response.form_email;
+					}
+					if(typeof response.startingLongitude != 'undefined'){
+						startingLongitude = response.startingLongitude;
+					}
+					if(typeof response.startingLatitude != 'undefined'){
+						startingLatitude = response.startingLatitude;
+					}
+				}
+			});
+		} else {
+			window.plugins.toast.showLongCenter('Brak połączenia z internetem.',function(a){},function(b){});
+		}
+	}
 	function reloadScripts(){
+		feedSettings();
 		$("header ul.list-2 li a").removeClass("active");
 		var targetID = $(".ui-page-active").attr('id');
 		$('header ul.list-2 li a[href="'+targetID+'"]').addClass("active");
