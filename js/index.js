@@ -1125,8 +1125,6 @@ var	warsztaty = [],
 		if(hideLoader){
 			$("#preloader").animate({"opacity":0},500,"easeOutExpo",function(){this.remove();});
 		}
-		
-		navigator.splashscreen.show();
 	}
 
 var app = {
